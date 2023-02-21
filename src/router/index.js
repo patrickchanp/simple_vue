@@ -1,6 +1,6 @@
-import {createRouter, createWebHistory, createWebHashHistory} from 'vue-router'
-import { defineAsyncComponent } from 'vue'
+import {createRouter, createWebHistory} from 'vue-router'
 import Home from "../views/Home.vue"
+import ToDoListPage from "../views/ToDoListPage.vue";
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -15,7 +15,7 @@ const router = createRouter({
         {
             path: '/list',
             name: 'list',
-            component: defineAsyncComponent(() => import(`../views/ToDoListPage.vue`)),
+            component: ToDoListPage,
             meta: {
                 title: '待办事项',
             },
