@@ -20,10 +20,10 @@
       >
         <a-input v-model:value="item.first" placeholder="Add new todo" />
       </a-form-item>
+      <DeleteFilled @click="removeTodoItem(item)" />
     </a-space>
     <a-form-item>
       <a-button type="dashed" block @click="addTodoItem">
-        <PlusOutlined />
         Add todo
       </a-button>
     </a-form-item>
@@ -34,7 +34,12 @@
 </template>
 <script>
 import { defineComponent, reactive, ref } from 'vue';
+import {DeleteFilled} from "@ant-design/icons-vue";
+
 export default defineComponent({
+  components:{
+    DeleteFilled
+  },
   setup() {
     const formRef = ref();
     const dynamicValidateForm = reactive({
@@ -46,6 +51,12 @@ export default defineComponent({
         id: Date.now(),
       });
     };
+    const removeItem = item => {
+      let index = dynamicValidateForm.items.indexOf(item);
+      if (index !== -1) {
+        dynamicValidateForm.items.splice(index, 1);
+      }
+    };
     const onFinish = values => {
       console.log('Received values of form:', values);
       console.log('dynamicValidateForm.items:', dynamicValidateForm.items);
@@ -55,6 +66,7 @@ export default defineComponent({
       dynamicValidateForm,
       onFinish,
       addTodoItem: addItem,
+      removeTodoItem:removeItem,
     };
   },
 });
