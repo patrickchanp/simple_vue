@@ -9,7 +9,6 @@ const goto = ()=>{
 
 <template>
   <h1>Hello World</h1>
-<!--    <button type="button" @click="goto">进入待办事项</button>-->
   <a-button @click="goto">进入待办事项</a-button>
 </template>
 
