@@ -6,13 +6,13 @@
   <a-divider/>
   <a-list v-if="listRef.length">
     <a-list-item v-for="(item,index) of listRef" :id="item.id" :key="item.id">
-        <div v-if="item.isEdit==false" :class="item.status==true?'done':''">
+        <div v-if="item.isEdit===false" :class="item.status===true?'done':''">
           <a-checkbox v-model:checked="item.status" @click="handleStatusChange(index)"/>  {{item.title}}
         </div>
         <input v-else v-model="item.title" ref="refInput" placeholder="edit todo"/>
       <div>
         <a-divider type="vertical"/>
-        <EditFilled v-if="item.isEdit===false && item.status==false" @click="handleEdit(index)" />
+        <EditFilled v-if="item.isEdit===false && item.status===false" @click="handleEdit(index)" />
         <CheckOutlined v-else-if="item.isEdit===true && item.status===false" @click="saveEdit(index)"/>
         <a-divider type="vertical"/>
         <DeleteFilled @click="removeItem(index)" />
