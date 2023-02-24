@@ -1,6 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Home from "../views/Home.vue"
-import ToDoListPage from "../views/ToDoListPage.vue";
+import Todo from "../views/Todo.vue";
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -15,7 +15,7 @@ const router = createRouter({
         {
             path: '/list',
             name: 'list',
-            component: ToDoListPage,
+            component: Todo,
             meta: {
                 title: '待办事项',
             },
