@@ -9,7 +9,7 @@
         <div v-if="item.isEdit===false" :class="item.status===true?'done':''">
           <a-checkbox v-model:checked="item.status" @click="handleStatusChange(index)"/>  {{item.title}}
         </div>
-        <input v-else v-model="item.title" ref="refInput" placeholder="edit todo"/>
+        <input v-else v-model="item.title" placeholder="edit todo"/>
       <div>
         <a-divider type="vertical"/>
         <EditFilled v-if="item.isEdit===false && item.status===false" @click="handleEdit(index)" />
@@ -42,9 +42,12 @@ export default {
   let todoItem = ref<string | null>(null);
   let listRef = reactive<Array<TodoList>>([]);
   let idRef = ref<number>(0);
-  const refInput = ref<string|null>(null);
 
    const addTodo = () => {
+     if(!todoItem.value) return alert("Please finish todo");
+     if(listRef.find((item)=>item.title==todoItem.value)){
+       return alert("Todo is exist");
+     };
      listRef.push({
        title:todoItem.value,
        id:++idRef.value,
@@ -65,13 +68,17 @@ export default {
     listRef[index].isEdit=false;
   }
    const saveEdit=(index)=>{
+     if(!listRef[index].title) return alert("Todo can't be null");
+     //Todo:编辑后去重
+     // if (listRef.find((item)=>item.title==todoItem.value)){
+     //   return alert("Item is exist")
+     // }
      listRef[index].isEdit=false;
     }
 
   return {
     todoItem,
     listRef,
-    refInput,
     addTodo,
     removeItem,
     handleEdit,
