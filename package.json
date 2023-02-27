@@ -13,7 +13,8 @@
     "ant-design-vue": "^3.2.15",
     "sass": "^1.58.3",
     "vue": "^3.2.45",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "vue.js": "^0.3.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
