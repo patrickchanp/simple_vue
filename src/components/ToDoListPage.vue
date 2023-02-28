@@ -16,7 +16,7 @@
       </div>
 
       <div>
-        <a-divider v-if="item.isEdit===false && item.status===false" type="vertical"/>
+        <a-divider v-if="item.status===false" type="vertical"/>
         <EditFilled v-if="item.isEdit===false && item.status===false" @click="handleEdit(index)" />
         <CheckOutlined v-else-if="item.isEdit===true && item.status===false" @click="saveEdit(index)"/>
         <a-divider type="vertical"/>
@@ -86,7 +86,7 @@ export default {
      listRef[index].isEdit=false;
     }
     const disabledDate = (current: Dayjs) => {
-      return current && current < dayjs().endOf('day');
+      return current < dayjs().subtract(1, 'day');
     };
 
   return {
