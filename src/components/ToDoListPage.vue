@@ -63,6 +63,7 @@ export default {
        deadline:deadlineRef.value
      });
      todoItem.value="";
+     console.log(todoItem.value);
      deadlineRef.value=null;
    }
    const removeItem = (index:number) => {
@@ -70,6 +71,7 @@ export default {
    }
    const handleEdit =(index)=>{
      listRef[index].isEdit = true;
+     console.log(listRef[index].title);
     }
   const handleStatusChange = (index:number) => {
      if (listRef[index].deadline==null){
@@ -80,9 +82,10 @@ export default {
    const saveEdit=(index)=>{
      if(!listRef[index].title) return alert("Todo can't be null");
      //Todo:verify the edited todoItem is repeated or not
-     // if (listRef.find((item)=>item.title==todoItem.value)){
+     // if (){
      //   return alert("Item is exist")
      // }
+     console.log(listRef[index].title);
      listRef[index].isEdit=false;
     }
     const disabledDate = (current: Dayjs) => {

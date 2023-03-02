@@ -1,6 +1,7 @@
 <script setup>
-import {useRouter} from "vue-router"
-const router =useRouter();
+// import {useRouter} from "vue-router"
+import router from '../././router/index.js'
+// const router =useRouter();
 const goto = ()=>{
   router.push("/list")
 }
