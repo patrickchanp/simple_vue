@@ -1,7 +1,6 @@
 <script setup>
-// import {useRouter} from "vue-router"
 import router from '../././router/index.js'
-// const router =useRouter();
+import ScheduleTodo from "../components/scheduleTodo.vue";
 const goto = ()=>{
   router.push("/list")
 }
@@ -10,6 +9,7 @@ const goto = ()=>{
 
 <template>
   <h1>Hello World</h1>
+  <schedule-todo/>
   <a-button @click="goto">进入待办事项</a-button>
 </template>
 

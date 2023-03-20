@@ -9,10 +9,13 @@
         <div v-if="item.isEdit===false" :class="item.status===true?'done':''">
           <a-checkbox v-model:checked="item.status" @change="handleStatusChange(index)" /> {{item.title}}
           <a-date-picker v-model:value="item.deadline" :disabled-date="disabledDate" size="small" placeholder="Deadline"/>
+          <a-date-picker v-model:value="item.schedule" :disabled-date="disabledDate" size="small" placeholder="ScheduleTime"/>
+
         </div>
       <div v-else class="edit-todo-item">
         <a-input class="edit-input" v-model:value="item.title" placeholder="edit todo" :bordered="true" size="small"/>
         <a-date-picker v-model:value="item.deadline" :disabled-date="disabledDate" size="small" placeholder="Deadline"/>
+        <a-date-picker v-model:value="item.schedule" :disabled-date="disabledDate" size="small" placeholder="ScheduleTime"/>
       </div>
 
       <div>
@@ -25,12 +28,19 @@
     </a-list-item>
   </a-list>
   <h5 v-else>Nothing to do, add new todo</h5>
+  <a-button type="primary" shape="round" @click="goBack" ghost="true">
+    <template #icon>
+      <LeftOutlined/>
+    </template>
+    Back
+  </a-button>
 </template>
 
 <script lang="ts">
 import { reactive, ref} from "vue";
-import {DeleteFilled,EditFilled,CheckOutlined} from "@ant-design/icons-vue";
+import {DeleteFilled,EditFilled,CheckOutlined,LeftOutlined} from "@ant-design/icons-vue";
 import dayjs, { Dayjs } from 'dayjs';
+import router from '../././router/index.js'
 
 interface TodoList {
   id:number,
@@ -38,17 +48,19 @@ interface TodoList {
   isEdit:boolean,
   status:boolean,
   deadline:dayjs,
+  schedule:dayjs,
 }
 export default {
   name: "ToDoListPage",
   components:{
-    DeleteFilled,EditFilled,CheckOutlined
+    DeleteFilled,EditFilled,CheckOutlined,LeftOutlined,
   },
   setup(){
   let todoItem = ref<string | null>(null);
   let listRef = reactive<Array<TodoList>>([]);
   let idRef = ref<number>(0);
   let deadlineRef = ref<Dayjs>(null);
+  let scheduleRef = ref<Dayjs>(null);
 
    const addTodo = () => {
      if(!todoItem.value) return alert("Please finish todo");
@@ -60,7 +72,8 @@ export default {
        id:++idRef.value,
        isEdit:false,
        status:false,
-       deadline:deadlineRef.value
+       deadline:deadlineRef.value,
+       schedule:scheduleRef.value,
      });
      todoItem.value="";
      console.log(todoItem.value);
@@ -91,6 +104,9 @@ export default {
     const disabledDate = (current: Dayjs) => {
       return current < dayjs().subtract(1, 'day');
     };
+   const goBack = () => {
+     router.push("/")
+   }
 
   return {
     todoItem,
@@ -102,6 +118,7 @@ export default {
     saveEdit,
     handleStatusChange,
     disabledDate,
+    goBack,
   };
   }
 }
