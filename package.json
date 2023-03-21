@@ -12,6 +12,7 @@
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
     "ant-design-vue": "^3.2.15",
+    "pinia": "^2.0.0-rc.10",
     "sass": "^1.58.3",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",
