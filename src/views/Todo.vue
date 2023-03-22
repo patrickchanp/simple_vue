@@ -1,12 +1,14 @@
 <template>
-  <to-do-list-page/>
+<!--  <to-do-list-page/>-->
+  <todo-list/>
 </template>
 
 <script>
 import ToDoListPage from "../components/ToDoListPage.vue";
+import TodoList from "../components/todoList.vue";
 export default {
   name: "Todo",
-  components: {ToDoListPage}
+  components: {TodoList, ToDoListPage}
 }
 </script>
 

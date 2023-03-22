@@ -10,7 +10,7 @@ const goto = ()=>{
 <template>
   <h1>Hello World</h1>
   <schedule-todo/>
-  <a-button @click="goto">进入待办事项</a-button>
+  <a-button @click="goto">go TodoList</a-button>
 </template>
 
 <style scoped>

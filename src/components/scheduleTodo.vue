@@ -1,5 +1,5 @@
 <template>
-<h5>What you're going to do today:</h5>
+<h3>What you're going to do today:</h3>
 </template>
 
 <script>
