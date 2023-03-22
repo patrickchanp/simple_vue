@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia'
 // @ts-ignore
-import dayjs from "dayjs"
+import dayjs ,{ Dayjs }from "dayjs"
 
 interface TodoItem {
     id:number,
-    title:string,
+    item:string,
     isEdit:boolean,
-    status:boolean,
+    completed:boolean,
     deadline:dayjs,
     schedule:dayjs,
 }
@@ -14,31 +14,40 @@ export const useTodoListStore = defineStore({
     id: 'todoList',
     state: () => ({
         rawItems: [] as TodoItem[],
+        id:0,
+        showAlert:false,
+        repeated:false,
     }),
-    getters: {
-        items: (state): Array<TodoItem> =>
-            state.rawItems.reduce((items, item) => {
-                // @ts-ignore
-                const existingItem = items.find((it) => it.title === item)
-                if (!existingItem) {
-                    items.push({ title: item, })
-                } else {
-                    existingItem.amount++
-                }
-                return items
-            }, [] as Array<TodoItem>),
-    },
     actions: {
-        addItem(title: string) {
-            console.log(title),
-            this.rawItems.push(title)
+        addItem(item: string,deadline:Dayjs,schedule:Dayjs) {
+            this.rawItems.push({item,id:this.id++,completed:false,isEdit:false,deadline,schedule})
         },
 
-        removeItem(title: string) {
-            const i = this.rawItems.lastIndexOf(title)
-            if (i > -1) this.rawItems.splice(i, 1)
+        removeItem(index: number) {
+           this.rawItems.splice(index, 1)
         },
 
+        inputAlert(){
+            this.showAlert = true;
+            setTimeout(()=>{
+                this.showAlert = false;
+            },3000);
+        },
+
+        handleEdit (index:number){
+            this.rawItems[index].isEdit = true;
+        },
+
+        saveEdit(index:number){
+            this.rawItems[index].isEdit = false;
+        },
+
+        inputRepeated(){
+            this.showAlert = true;
+            setTimeout(()=>{
+                this.showAlert = false;
+            },3000);
+        },
 
     },
 })
