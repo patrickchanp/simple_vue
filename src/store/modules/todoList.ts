@@ -1,6 +1,6 @@
-import { defineStore, acceptHMRUpdate } from 'pinia'
-import { useUserStore } from './user'
-import dayjs from "dayjs";
+import { defineStore } from 'pinia'
+// @ts-ignore
+import dayjs from "dayjs"
 
 interface TodoItem {
     id:number,
@@ -18,19 +18,19 @@ export const useTodoListStore = defineStore({
     getters: {
         items: (state): Array<TodoItem> =>
             state.rawItems.reduce((items, item) => {
+                // @ts-ignore
                 const existingItem = items.find((it) => it.title === item)
-
                 if (!existingItem) {
                     items.push({ title: item, })
                 } else {
                     existingItem.amount++
                 }
-
                 return items
             }, [] as Array<TodoItem>),
     },
     actions: {
         addItem(title: string) {
+            console.log(title),
             this.rawItems.push(title)
         },
 
@@ -39,19 +39,7 @@ export const useTodoListStore = defineStore({
             if (i > -1) this.rawItems.splice(i, 1)
         },
 
-        async purchaseItems() {
-            const user = useUserStore()
-            if (!user.name) return
 
-            console.log('Purchasing', this.items)
-            const n = this.items.length
-            this.rawItems = []
-
-            return n
-        },
     },
 })
 
-if (import.meta.hot) {
-    import.meta.hot.accept(acceptHMRUpdate(useTodoListStore, import.meta.hot))
-}

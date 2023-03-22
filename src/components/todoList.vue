@@ -38,7 +38,6 @@
 <script lang="ts">
 
 import { defineComponent, ref } from 'vue'
-import { useUserStore } from '../store/modules/user.ts'
 import { useTodoListStore } from '../store/modules/todoList.ts'
 import {DeleteFilled,EditFilled,CheckOutlined,LeftOutlined} from "@ant-design/icons-vue";
 import router from '../././router/index.js'
@@ -50,10 +49,11 @@ export default defineComponent({
   components: {DeleteFilled,LeftOutlined,EditFilled,CheckOutlined },
 
   setup() {
-    const user = useUserStore()
     const todoList = useTodoListStore()
 
     const todoItem = ref('')
+    const deadlineRef = ref<Dayjs>(null);
+    const scheduleRef = ref<Dayjs>(null);
 
     function addItemInList() {
       if (!todoItem.value) return
@@ -69,14 +69,13 @@ export default defineComponent({
     };
 
     // @ts-ignore
-    window.stores = { user, todoList: todoList }
+    window.stores = { todoList: todoList }
 
     return {
       todoItem: todoItem,
       addItemInLIst: addItemInList,
       todoList: todoList,
       goBack,
-      user,
       disabledDate:disabledDate,
   }
   },
