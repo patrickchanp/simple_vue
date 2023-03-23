@@ -2,7 +2,7 @@
   <div>
     <a-input type="text" v-model:value="todoItem" placeholder="Add new todo" @keyup.enter="addItemInLIst(todoItem)"/>
     <p v-show="store.showAlert" class="alert">Please finish todo</p>
-    <p v-if="store.repeated" class="alert">todo is exist</p>
+<!--    <p v-if="store.repeated" class="alert">todo is exist</p>-->
     <a-divider/>
     <a-button @click="addItemInLIst(todoItem)">Submit</a-button>
   </div>
@@ -24,14 +24,13 @@ export default defineComponent({
         store.inputAlert()
         return;
       }
-      if(store.rawItems.find((i)=>i.item == item)){
-        store.inputRepeated()
-        return;
-      }
+      // if(store.rawItems.find((i)=>i.item == item)){
+      //   store.inputRepeated()
+      //   return;
+      // }
       store.addItem(item,this.deadlineRef,this.scheduleRef);
       todoItem.value = ''
     }
-
 
     return {todoItem,addItemInLIst:addItemInList, store,deadlineRef,scheduleRef};
   },
@@ -46,8 +45,7 @@ input {
   width: 90%;
 }
 button {
-  border: none;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .alert {

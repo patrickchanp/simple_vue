@@ -45,10 +45,13 @@ export default defineComponent({
     const deadlineRef = ref<Dayjs>();
     const scheduleRef = ref<Dayjs>();
 
-    function handleItemIsCompleted(index:number){
-      // if(this.rawItems[index].completed == true){
-      //   this.scheduledItems.splice(index);
-      // }
+    function handleItemIsCompleted(index:number) {
+      if (this.rawItems[index].completed == true) {
+        let indexOfScheduledItem = this.scheduledItems.indexOf(this.rawItems[index]);
+        this.scheduledItems.splice(indexOfScheduledItem, 1);
+      } else {
+        this.scheduledItems.push(this.rawItems[index])
+      }
     }
     const disabledDate = (current: Dayjs) => {
       return current < dayjs().subtract(1, 'day');

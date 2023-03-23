@@ -28,7 +28,7 @@
     </a-list-item>
   </a-list>
   <h5 v-else>Nothing to do, add new todo</h5>
-  <a-button type="primary" shape="round" @click="goBack" ghost="true">
+  <a-button type="primary" shape="round" @click="goBack">
     <template #icon>
       <LeftOutlined/>
     </template>
