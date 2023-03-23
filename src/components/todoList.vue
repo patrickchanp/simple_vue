@@ -20,7 +20,7 @@
               <EditFilled v-if="todo.isEdit===false && todo.completed ===false" @click="store.handleEdit(index)"/>
               <CheckOutlined v-else-if="todo.isEdit===true && todo.completed===false" @click="store.saveEdit(index)"/>
               <a-divider type="vertical"/>
-              <DeleteFilled @click="store.removeItem(index)"/>
+              <DeleteFilled @click="handleRemoveItem(index)"/>
             </div>
           </a-list-item>
         </a-list>
@@ -53,6 +53,12 @@ export default defineComponent({
         this.scheduledItems.push(this.rawItems[index])
       }
     }
+    function handleRemoveItem(index:number){
+      store.removeItem(index);
+      let indexOfScheduledItem = this.scheduledItems.indexOf(this.rawItems[index]);
+      console.log('=='+indexOfScheduledItem);
+      this.scheduledItems.splice(indexOfScheduledItem, 1);
+    }
     const disabledDate = (current: Dayjs) => {
       return current < dayjs().subtract(1, 'day');
     };
@@ -66,6 +72,7 @@ export default defineComponent({
       deadlineRef,
       scheduleRef,
       handleItemIsCompleted:handleItemIsCompleted,
+      handleRemoveItem:handleRemoveItem,
   }
   },
 })

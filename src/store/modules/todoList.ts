@@ -39,10 +39,6 @@ export const useTodoListStore = defineStore({
 
         removeItem(index: number) {
            this.rawItems.splice(index, 1);
-
-           let indexOfScheduledItem = this.scheduledItems.indexOf(this.rawItems[index]);
-            console.log('=='+indexOfScheduledItem);
-           // this.scheduledItems.splice(indexOfScheduledItem, 1);
         },
 
         inputAlert(){
@@ -60,12 +56,12 @@ export const useTodoListStore = defineStore({
             this.rawItems[index].isEdit = false;
         },
 
-        // inputRepeated(){
-        //     this.showAlert = true;
-        //     setTimeout(()=>{
-        //         this.showAlert = false;
-        //     },2000);
-        // },
+        inputRepeated(){
+            this.repeated = true;
+            setTimeout(()=>{
+                this.repeated = false;
+            },2000);
+        },
 
     },
 })
