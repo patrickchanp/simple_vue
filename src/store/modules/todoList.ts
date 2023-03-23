@@ -9,6 +9,7 @@ interface TodoItem {
     completed:boolean,
     deadline:dayjs,
     schedule:dayjs,
+    isScheduled:boolean,
 }
 export const useTodoListStore = defineStore({
     id: 'todoList',
@@ -17,10 +18,23 @@ export const useTodoListStore = defineStore({
         id:0,
         showAlert:false,
         repeated:false,
+        scheduledItems:[] as TodoItem[],
     }),
     actions: {
         addItem(item: string,deadline:Dayjs,schedule:Dayjs) {
             this.rawItems.push({item,id:this.id++,completed:false,isEdit:false,deadline,schedule})
+        },
+
+        addScheduledItems(index:number){
+            let i =this.rawItems[index];
+            console.log("======="+i.schedule)
+          if (!i.schedule){
+              i.isScheduled = false;
+          }
+          if(i.schedule.day().toString()==dayjs().day().toString() && i.completed==false){
+              this.scheduledItems.push(i);
+               i.isScheduled = true;
+          }
         },
 
         removeItem(index: number) {
