@@ -38,12 +38,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-input {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  height: 25px;
-  width: 90%;
-}
 button {
   font-weight: 600;
 }

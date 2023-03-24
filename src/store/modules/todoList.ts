@@ -1,16 +1,8 @@
 import { defineStore } from 'pinia'
 // @ts-ignore
 import dayjs ,{ Dayjs }from "dayjs"
+import {TodoItem} from "../../model/TodoItem";
 
-interface TodoItem {
-    id:number,
-    item:string,
-    isEdit:boolean,
-    completed:boolean,
-    deadline:dayjs,
-    schedule:dayjs,
-    isScheduled:boolean,
-}
 export const useTodoListStore = defineStore({
     id: 'todoList',
     state: () => ({

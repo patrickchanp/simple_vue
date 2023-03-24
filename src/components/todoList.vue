@@ -8,12 +8,8 @@
               <a-divider type="vertical"/>
               <a-date-picker v-model:value="todo.schedule" :disabled-date="disabledDate" size="small" placeholder="Schedule" @change="store.addScheduledItems(index)" class="date-picker"/>
             </div>
-            <div v-else class="edit-todo-item">
-              <a-input class="edit-input" v-model:value="todo.item" placeholder="edit todo" :bordered="true" size="small" @keyup.enter="store.saveEdit(index)"/>
-              <a-divider type="vertical"/>
-              <a-date-picker v-model:value="todo.deadline" :disabled-date="disabledDate" size="small" placeholder="Deadline"/>
-              <a-divider type="vertical"/>
-              <a-date-picker v-model:value="todo.schedule" :disabled-date="disabledDate" size="small" placeholder="Schedule"/>
+            <div v-else>
+              <edit-todo :todo="todo" :index="index"/>
             </div>
             <div>
               <a-divider v-if="todo.completed===false" type="vertical"/>
@@ -34,9 +30,10 @@ import {DeleteFilled,EditFilled,CheckOutlined} from "@ant-design/icons-vue";
 import dayjs, {Dayjs} from "dayjs";
 import {storeToRefs} from "pinia";
 import TodoForm from "./todoForm.vue";
+import EditTodo from "./editTodo.vue";
 
 export default defineComponent({
-  components: {TodoForm, DeleteFilled,EditFilled,CheckOutlined },
+  components: {EditTodo, TodoForm, DeleteFilled,EditFilled,CheckOutlined },
 
   setup() {
     const store = useTodoListStore()
@@ -59,6 +56,7 @@ export default defineComponent({
       console.log('=='+indexOfScheduledItem);
       this.scheduledItems.splice(indexOfScheduledItem, 1);
     }
+
     const disabledDate = (current: Dayjs) => {
       return current < dayjs().subtract(1, 'day');
     };
@@ -79,9 +77,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.edit-todo-item{
-  display: inline-flex;
+input{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 25px;
+  max-width: 150px;
 }
+
 .date-picker{
   width: 115px;
 }
