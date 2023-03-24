@@ -30,6 +30,8 @@ export const useTodoListStore = defineStore({
         },
 
         removeItem(index: number) {
+            let indexOfScheduledItem = this.scheduledItems.indexOf(this.rawItems[index]);
+            this.scheduledItems.splice(indexOfScheduledItem, 1);
            this.rawItems.splice(index, 1);
         },
 
