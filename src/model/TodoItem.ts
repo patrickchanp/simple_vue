@@ -9,4 +9,5 @@ export interface TodoItem {
     deadline:dayjs,
     schedule:dayjs,
     isScheduled:boolean,
+    nearDeadline:boolean,
 }

@@ -1,7 +1,7 @@
 <template>
   <a-checkbox v-model:checked="todo.completed" @change="handleItemIsCompleted(index)" />
   {{ todo.item }}
-  <a-date-picker v-model:value="todo.deadline" :disabled-date="disabledDate" size="small" placeholder="Deadline" class="date-picker"/>
+  <a-date-picker v-model:value="todo.deadline" :disabled-date="disabledDate" size="small" placeholder="Deadline" @change="store.addDeadlineItems(index)" class="date-picker"/>
   <a-divider type="vertical"/>
   <a-date-picker v-model:value="todo.schedule" :disabled-date="disabledDate" size="small" placeholder="Schedule" @change="store.addScheduledItems(index)" class="date-picker"/>
 </template>

@@ -10,7 +10,6 @@ export const useTodoListStore = defineStore({
         id:0,
         showAlert:false,
         repeated:false,
-        scheduledItems:[] as TodoItem[],
     }),
     actions: {
         addItem(item: string,deadline:Dayjs,schedule:Dayjs) {
@@ -19,19 +18,32 @@ export const useTodoListStore = defineStore({
 
         addScheduledItems(index:number){
             let i =this.rawItems[index];
-            console.log("======="+i.schedule)
+            console.log('111111');
           if (!i.schedule){
               i.isScheduled = false;
           }
-          if(i.schedule.day().toString()==dayjs().day().toString() && i.completed==false){
-              this.scheduledItems.push(i);
+          if(i.schedule.day().toString() <= dayjs().day().toString() && i.completed==false){
+              // this.scheduledItems.push(i);
                i.isScheduled = true;
           }
         },
 
+        addDeadlineItems(index:number){
+            let i =this.rawItems[index];
+            console.log('222222');
+            console.log(Number(i.deadline.day().toString()));
+            console.log(Number(dayjs().day().toString()));
+            if (!i.deadline){
+                i.nearDeadline = false;
+            }
+            if(Number(i.deadline.day().toString()) <= Number(dayjs().day().toString()) + 2 && i.completed==false){
+                i.nearDeadline = true;
+            }
+        },
+
         removeItem(index: number) {
             let indexOfScheduledItem = this.scheduledItems.indexOf(this.rawItems[index]);
-            this.scheduledItems.splice(indexOfScheduledItem, 1);
+            // this.scheduledItems.splice(indexOfScheduledItem, 1);
            this.rawItems.splice(index, 1);
         },
 
