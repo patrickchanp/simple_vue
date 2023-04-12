@@ -1,5 +1,6 @@
 <template>
   <h1>Todo List</h1>
+  <section class="todo-container">
   <todo-form/>
   <todo-list/>
   <a-button @click="goBack">
@@ -8,6 +9,7 @@
     </template>
     Back
   </a-button>
+  </section>
 </template>
 
 <script>
@@ -29,7 +31,13 @@ export default {
 </script>
 
 <style scoped>
-button{
-
+.todo-container{
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*width: 100vw;*/
+  /*height: 100vh;*/
+  box-sizing: border-box;
+  /*padding-top: 100px;*/
+  background: linear-gradient(rgba(93, 190, 129, .02), rgba(125, 185, 222, .02));
 }
 </style>

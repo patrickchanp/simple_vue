@@ -4,7 +4,7 @@
   <a-list>
     <a-list-item v-for="(todo) in rawItems " :key="todo.id">
       <div v-if="todo.isScheduled===true && todo.completed===false">
-        · {{todo.item}}
+          · {{todo.item}} {{todo.priority}}
       </div>
       <div v-else>
         Nothing up to date
@@ -18,7 +18,7 @@
   <a-list>
     <a-list-item v-for="(todo) in rawItems " :key="todo.id">
       <div v-if="todo.nearDeadline===true && todo.completed===false">
-        · {{todo.item}}
+        · {{todo.item}} {{todo.status}}
       </div>
       <div v-else>
         Nothing up to deadline

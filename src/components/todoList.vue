@@ -1,6 +1,7 @@
 <template>
         <a-list>
           <a-list-item v-for="(todo,index) in rawItems" :key="todo.id">
+            <a-space>
             <div v-if="todo.isEdit===false" :class="todo.completed===true?'done':''">
               <todo-item :index="index" :todo="todo"/>
             </div>
@@ -8,12 +9,13 @@
               <edit-todo :todo="todo" :index="index"/>
             </div>
             <div>
-              <a-divider v-if="todo.completed===false" type="vertical"/>
+              <a-space>
               <EditFilled v-if="todo.isEdit===false && todo.completed ===false" @click="store.handleEdit(index)"/>
               <CheckOutlined v-else-if="todo.isEdit===true && todo.completed===false" @click="store.saveEdit(index)"/>
-              <a-divider type="vertical"/>
               <DeleteFilled @click="store.removeItem(index)"/>
+              </a-space>
             </div>
+            </a-space>
           </a-list-item>
         </a-list>
 </template>
@@ -57,13 +59,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-input{
-  margin-top: 5px;
-  margin-bottom: 5px;
-  height: 25px;
-  max-width: 150px;
-}
-
 .date-picker{
   width: 115px;
 }

@@ -38,6 +38,14 @@ export default defineComponent({
 </script>
 
 <style scoped>
+input{
+  width: 100%;
+  max-width: 200px;
+  /*font-size: 18px;*/
+  color: #F05E1C;
+  border: 2px solid rgba(255, 177, 27, 0.5);
+  border-radius: 10px;
+}
 button {
   font-weight: 600;
 }

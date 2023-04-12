@@ -1,10 +1,10 @@
 <template>
   <div class="edit-todo-item">
+    <a-space>
     <a-input class="edit-input" v-model:value="todo.item" placeholder="edit todo" :bordered="true" size="small" @keyup.enter="store.saveEdit(index)"/>
-    <a-divider type="vertical"/>
-    <a-date-picker v-model:value="todo.deadline" :disabled-date="disabledDate" size="small" placeholder="Deadline"/>
-    <a-divider type="vertical"/>
-    <a-date-picker v-model:value="todo.schedule" :disabled-date="disabledDate" size="small" placeholder="Schedule"/>
+    <a-date-picker v-model:value="todo.deadline" :disabled-date="disabledDate" size="small" placeholder="Deadline" class="date-picker"/>
+    <a-date-picker v-model:value="todo.schedule" :disabled-date="disabledDate" size="small" placeholder="Schedule" class="date-picker"/>
+    </a-space>
   </div>
 </template>
 
@@ -38,5 +38,12 @@ export default {
 <style scoped>
 .edit-todo-item{
   display: inline-flex;
+  justify-content: center;
+}
+input{
+  width: 100px;
+}
+.date-picker{
+  width: 100px;
 }
 </style>
