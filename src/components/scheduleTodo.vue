@@ -1,31 +1,20 @@
 <template>
-  <div>
-  <h3>Something going to do today or before:</h3>
+  <h3>What you're going to do today:</h3>
   <a-list>
-    <a-list-item v-for="(todo) in rawItems " :key="todo.id">
-      <div v-if="todo.isScheduled===true && todo.completed===false">
-          · {{todo.item}} {{todo.priority}}
-      </div>
-      <div v-else>
-        Nothing up to date
+    <a-list-item v-for="(todo) in scheduledItems " :key="todo.id">
+      <div v-if="scheduledItems.length > 0">
+        · {{todo.item}} {{todo.priority}}
       </div>
     </a-list-item>
   </a-list>
-  </div>
-  <a-divider/>
-  <div>
-  <h3>Something approaching the deadline:</h3>
+  <h3>Something up to deadline:</h3>
   <a-list>
-    <a-list-item v-for="(todo) in rawItems " :key="todo.id">
-      <div v-if="todo.nearDeadline===true && todo.completed===false">
+    <a-list-item v-for="(todo) in nearDeadlineItems " :key="todo.id">
+      <div v-if="nearDeadlineItems.length > 0">
         · {{todo.item}} {{todo.status}}
       </div>
-      <div v-else>
-        Nothing up to deadline
-      </div>
     </a-list-item>
   </a-list>
-  </div>
 </template>
 
 <script lang="ts">
@@ -35,19 +24,19 @@ import {storeToRefs} from "pinia";
 
 export default defineComponent({
   name: "scheduleTodo",
-   setup(){
+  setup(){
     const store = useTodoListStore();
-    const {scheduledItems,rawItems} = storeToRefs(store);
+    const {scheduledItems,rawItems,nearDeadlineItems} = storeToRefs(store);
 
     return {
-      scheduledItems,store,rawItems,
+      scheduledItems,store,rawItems,nearDeadlineItems,
     }
   }
 })
 </script>
 
 <style scoped>
-text{
-  /*text-align: left;*/
+h3{
+  text-align: left;
 }
 </style>

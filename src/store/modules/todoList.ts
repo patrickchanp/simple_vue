@@ -7,6 +7,8 @@ export const useTodoListStore = defineStore({
     id: 'todoList',
     state: () => ({
         rawItems: [] as TodoItem[],
+        scheduledItems: [] as TodoItem[],
+        nearDeadlineItems: [] as TodoItem[],
         id:0,
         showAlert:false,
         repeated:false,
@@ -19,33 +21,34 @@ export const useTodoListStore = defineStore({
         addScheduledItems(index:number){
             let i =this.rawItems[index];
             const now = new Date();
-            console.log('111111');
-          if (!i.schedule){
-              i.isScheduled = false;
-          }
-          if(i.schedule.date() <= now.getDate() && i.completed==false){
-               i.isScheduled = true;
-          }
+            let indexOfScheduledItem = this.scheduledItems.indexOf(this.rawItems[index]);
+
+            if( i.schedule == null || i.schedule.date()> now.getDate()) {
+                this.scheduledItems.splice(indexOfScheduledItem, 1);
+            }
+            else if(i.schedule.date() == now.getDate() && i.completed==false){
+                this.scheduledItems.push(i);
+            }
         },
 
         addDeadlineItems(index:number){
             let i =this.rawItems[index];
             const now = new Date();
-            if (!i.deadline){
-                i.nearDeadline = false;
+            let indexOfScheduledItem = this.scheduledItems.indexOf(this.rawItems[index]);
+
+            if (i.deadline == null){
+                this.nearDeadlineItems.splice(indexOfScheduledItem,1)
             }
-            if(i.deadline > now &&
+            else if(i.deadline > now &&
                 i.deadline.date() <= now.getDate() + 3
                 && i.completed == false){
-                i.nearDeadline = true;
-            }else {
-                i.nearDeadline = false
+                this.nearDeadlineItems.push(i);
             }
         },
 
         removeItem(index: number) {
             let indexOfScheduledItem = this.scheduledItems.indexOf(this.rawItems[index]);
-            // this.scheduledItems.splice(indexOfScheduledItem, 1);
+            this.scheduledItems.splice(indexOfScheduledItem, 1);
            this.rawItems.splice(index, 1);
         },
 

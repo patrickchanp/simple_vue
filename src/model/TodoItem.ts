@@ -20,8 +20,6 @@ export interface TodoItem {
     completed:boolean,
     deadline:dayjs,
     schedule:dayjs,
-    isScheduled:boolean,
-    nearDeadline:boolean,
     priority: Priority,
     status: Status,
 }
