@@ -11,7 +11,7 @@
             <div>
               <a-space>
               <EditFilled v-if="todo.isEdit===false && todo.completed ===false" @click="store.handleEdit(index)"/>
-              <ToTopOutlined v-if="todo.isEdit===false && todo.completed ===false && todo.isTop!=true" @click="store.handleTopItem(index)"/>
+              <ToTopOutlined v-if="todo.isEdit===false && todo.completed ===false && todo.isTop!==true" @click="store.handleTopItem(index)"/>
               <ArrowDownOutlined v-if="todo.isEdit===false && todo.completed ===false && todo.isTop===true" @click="store.handleCancelTopItem(index)"/>
               <CheckOutlined v-else-if="todo.isEdit===true && todo.completed===false" @click="store.saveEdit(index)"/>
               <DeleteFilled @click="store.removeItem(index)"/>
