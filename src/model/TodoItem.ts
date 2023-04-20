@@ -22,4 +22,5 @@ export interface TodoItem {
     schedule:dayjs,
     priority: Priority,
     status: Status,
+    isTop:boolean,
 }

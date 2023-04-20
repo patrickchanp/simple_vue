@@ -1,5 +1,5 @@
 <template>
-  <h3>What you're going to do today:</h3>
+  <h3>Something going to do today:</h3>
   <a-list>
     <a-list-item v-for="(todo) in scheduledItems " :key="todo.id">
       <div v-if="scheduledItems.length > 0">

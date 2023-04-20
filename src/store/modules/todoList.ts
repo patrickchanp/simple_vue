@@ -51,7 +51,20 @@ export const useTodoListStore = defineStore({
          if(i.completed ==true) {
              this.rawItems.sort(a=>a.completed?0:-1);
          }
+        },
 
+        handleTopItem(index:number){
+            let i =this.rawItems[index];
+            i.isTop = true;
+          const item=  this.rawItems.splice(index,1);
+            this.rawItems.unshift(item[0]);
+        },
+
+        handleCancelTopItem(index:number){
+            let i =this.rawItems[index];
+            i.isTop = false;
+            const item=  this.rawItems.splice(index,1);
+            this.rawItems.push(item[0]);
         },
 
         removeItem(index: number) {
