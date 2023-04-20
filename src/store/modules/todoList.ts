@@ -46,6 +46,14 @@ export const useTodoListStore = defineStore({
             }
         },
 
+        sortItems(index:number){
+            let i =this.rawItems[index];
+         if(i.completed ==true) {
+             this.rawItems.sort(a=>a.completed?0:-1);
+         }
+
+        },
+
         removeItem(index: number) {
             let indexOfScheduledItem = this.scheduledItems.indexOf(this.rawItems[index]);
             this.scheduledItems.splice(indexOfScheduledItem, 1);

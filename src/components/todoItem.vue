@@ -1,6 +1,6 @@
 <template>
   <a-space>
-    <a-checkbox v-model:checked="todo.completed" />
+    <a-checkbox v-model:checked="todo.completed" @change="store.sortItems(index)"/>
     <a-select v-model:value="todo.priority" class="selection" size="small">
       <a-select-option value="Low">{{ Priority.LOW }}</a-select-option>
       <a-select-option value="Medium">{{ Priority.MEDIUM }}</a-select-option>
