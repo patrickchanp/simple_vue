@@ -2,7 +2,7 @@
   <h3>Something going to do today:</h3>
   <a-list>
     <a-list-item v-for="(todo) in scheduledItems " :key="todo.id">
-      <div v-if="scheduledItems.length > 0">
+      <div v-if="scheduledItems.length > 0 && todo.completed ===false">
         · {{todo.item}} {{todo.priority}}
       </div>
     </a-list-item>

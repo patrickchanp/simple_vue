@@ -23,10 +23,10 @@ export const useTodoListStore = defineStore({
             const now = new Date();
             let indexOfScheduledItem = this.scheduledItems.indexOf(this.rawItems[index]);
 
-            if( i.schedule == null || i.schedule.date()> now.getDate()) {
+            if(  i.completed === true) {
                 this.scheduledItems.splice(indexOfScheduledItem, 1);
             }
-            else if(i.schedule.date() == now.getDate() && i.completed==false){
+            else if(i.schedule.date() == now.getDate() && i.completed === false){
                 this.scheduledItems.push(i);
             }
         },
@@ -34,14 +34,14 @@ export const useTodoListStore = defineStore({
         addDeadlineItems(index:number){
             let i =this.rawItems[index];
             const now = new Date();
-            let indexOfScheduledItem = this.scheduledItems.indexOf(this.rawItems[index]);
+            let indexOfScheduledItem = this.nearDeadlineItems.indexOf(this.rawItems[index]);
 
-            if (i.deadline == null){
+            if (i.deadline == null || i.completed === true){
                 this.nearDeadlineItems.splice(indexOfScheduledItem,1)
             }
             else if(i.deadline > now &&
                 i.deadline.date() <= now.getDate() + 3
-                && i.completed == false){
+                && i.completed === false){
                 this.nearDeadlineItems.push(i);
             }
         },
@@ -49,6 +49,8 @@ export const useTodoListStore = defineStore({
         sortItems(index:number){
             let i =this.rawItems[index];
          if(i.completed ==true) {
+             i.isTop = false;
+             this.scheduledItems.splice(1);
              this.rawItems.sort(a=>a.completed?0:-1);
          }
         },

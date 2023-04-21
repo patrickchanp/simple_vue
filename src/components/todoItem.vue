@@ -1,6 +1,6 @@
 <template>
   <a-space>
-    <a-checkbox v-model:checked="todo.completed" @change="store.sortItems(index)"/>
+    <a-checkbox v-model:checked="todo.completed" @change="store.sortItems(index)" class="check-box"/>
     <a-select v-model:value="todo.priority" class="selection" size="small">
       <a-select-option value="Low">{{ Priority.LOW }}</a-select-option>
       <a-select-option value="Medium">{{ Priority.MEDIUM }}</a-select-option>
@@ -65,7 +65,7 @@ export default {
 
 <style scoped>
 .itemContainer{
-  width: 160px;
+  width: 180px;
   text-align: left;
 }
 .selection{
@@ -76,6 +76,9 @@ export default {
 }
 .date-picker{
   width: 100px;
+}
+.check-box{
+  margin-left: 3px;
 }
 
 </style>
